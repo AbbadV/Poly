@@ -13,28 +13,28 @@ class Poly
 
 public:
     Poly();
-    Poly(int);
-    Poly(int, int);
-    Poly(const Poly &);
+    Poly(int coeff);
+    Poly(int coeff, int power);
+    Poly(const Poly &source);
     ~Poly();
 
     int getCoeff() const;
-    void setCoeff(int, int) const;
+    void setCoeff(int coeff, int power) const;
 
-    Poly operator+(const Poly &) const;
-    Poly operator-(const Poly &) const;
-    Poly operator*(const Poly &) const;
+    Poly operator+(const Poly &rhs) const;
+    Poly operator-(const Poly &rhs) const;
+    Poly operator*(const Poly &rhs) const;
 
-    Poly operator+=(const Poly &);
-    Poly operator-=(const Poly &);
-    Poly operator*=(const Poly &);
+    Poly operator+=(const Poly &rhs);
+    Poly operator-=(const Poly &rhs);
+    Poly operator*=(const Poly &rhs);
 
-    bool operator==(const Poly &) const;
-    bool operator!=(const Poly &) const;
-    void operator=(const Poly &);
+    bool operator==(const Poly &rhs) const;
+    bool operator!=(const Poly &rhs) const;
+    void operator=(const Poly &rhs);
 
 private:
-
+    int* coeffPtr;
 };
 
 
