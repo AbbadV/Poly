@@ -1,12 +1,12 @@
+// --------------------- Poly.cpp -----------------------------------------
+//
+// Shyawn Karim, CSS 343
+// Created:         October 6, 2015
+// Last Modified:   October 10, 2015
 // --------------------------------------------------------------
-//
-//
-//
-//
+// Purpose:
 // --------------------------------------------------------------
-//
-// --------------------------------------------------------------
-//
+// Notes:
 // --------------------------------------------------------------
 
 #include "Poly.h"
@@ -29,7 +29,7 @@ ostream &operator<<(ostream &outStream, const Poly &poly)
 }
 
 // --------------------- Default Constructor -----------------------------------------
-// DONE
+// Takes no parameters, creates Poly object with size 1 and value set to 0
 // --------------------------------------------------------------
 Poly::Poly()
 {
@@ -39,7 +39,8 @@ Poly::Poly()
 }
 
 // --------------------- Constructor int -----------------------------------------
-// DONE
+// Overloaded constructor takes one parameter. Creates a Poly object with
+// array size 1 and sets that value to the coefficent parameter
 // --------------------------------------------------------------
 Poly::Poly(int c)
 {
@@ -49,7 +50,8 @@ Poly::Poly(int c)
 }
 
 // --------------------- Constructor int int -----------------------------------------
-// DONE
+// Overloaded constructor takes two parameters. Creates a Poly object with
+// array size set to power + 1 and the coefficient value in the last index
 // --------------------------------------------------------------
 Poly::Poly(int c, int p)
 {
@@ -65,7 +67,7 @@ Poly::Poly(int c, int p)
 }
 
 // --------------------- Copy Constructor -----------------------------------------
-// DONE
+// Creates a deep copy of the Poly object passed in
 // --------------------------------------------------------------
 Poly::Poly(const Poly &source)
 {
@@ -79,16 +81,17 @@ Poly::Poly(const Poly &source)
 }
 
 // --------------------- Destructor -----------------------------------------
-// CAUTION
+// Deletes coeffPtr and sets it NULL
 // --------------------------------------------------------------
 Poly::~Poly()
 {
     delete[] coeffPtr;
-    //coeffPtr = NULL;
+    coeffPtr = NULL;
 }
 
 // --------------------- getCoeff -----------------------------------------
-// DONE
+// Returns the coefficient at chosen index (power)
+// Returns 0 if index is out of range
 // --------------------------------------------------------------
 int Poly::getCoeff(int p) const
 {
@@ -103,7 +106,10 @@ int Poly::getCoeff(int p) const
 }
 
 // --------------------- setCoeff -----------------------------------------
-// CAUTION
+// Adds an additional coefficient to an already established poly array
+// If new coefficient has a power greater than largest array index a new
+// array is dynamically allocated and all coefficients are transferred
+// to the new array
 // --------------------------------------------------------------
 void Poly::setCoeff(int c, int p)
 {
@@ -128,17 +134,17 @@ void Poly::setCoeff(int c, int p)
             }
 
             delete[] coeffPtr;
-            //coeffPtr = NULL;
+            coeffPtr = NULL;
             coeffPtr = tempArr;
             delete[] tempArr;
-            //tempArr = NULL;
+            tempArr = NULL;
             size = p +1;
         }
     }
 }
 
 // --------------------- getSize -----------------------------------------
-// returns the size of the array
+// Returns the size of the array
 // --------------------------------------------------------------
 int Poly::getSize() const
 {
@@ -146,7 +152,7 @@ int Poly::getSize() const
 }
 
 // --------------------- operator+ -----------------------------------------
-//
+// DONE
 // --------------------------------------------------------------
 Poly Poly::operator+(const Poly &rhs) const
 {
@@ -185,11 +191,18 @@ Poly Poly::operator-(const Poly &rhs) const
 }
 
 // --------------------- operator* -----------------------------------------
-//
+// WORKING
 // --------------------------------------------------------------
 Poly Poly::operator*(const Poly &rhs) const
 {
-    return Poly();
+    int tempSize;
+    tempSize = size + rhs.size - 1;
+
+    Poly tempArr;
+
+    for ()
+
+    return tempArr;
 }
 
 // --------------------- operator+= -----------------------------------------
