@@ -29,8 +29,7 @@ ostream &operator<<(ostream &outStream, const Poly &poly)
 }
 
 // --------------------- Default Constructor -----------------------------------------
-
-//
+// DONE
 // --------------------------------------------------------------
 Poly::Poly()
 {
@@ -40,7 +39,7 @@ Poly::Poly()
 }
 
 // --------------------- Constructor int -----------------------------------------
-//
+// DONE
 // --------------------------------------------------------------
 Poly::Poly(int c)
 {
@@ -50,7 +49,7 @@ Poly::Poly(int c)
 }
 
 // --------------------- Constructor int int -----------------------------------------
-//
+// DONE
 // --------------------------------------------------------------
 Poly::Poly(int c, int p)
 {
@@ -66,7 +65,7 @@ Poly::Poly(int c, int p)
 }
 
 // --------------------- Copy Constructor -----------------------------------------
-//
+// DONE
 // --------------------------------------------------------------
 Poly::Poly(const Poly &source)
 {
@@ -89,7 +88,7 @@ Poly::~Poly()
 }
 
 // --------------------- getCoeff -----------------------------------------
-//
+// DONE
 // --------------------------------------------------------------
 int Poly::getCoeff(int p) const
 {
@@ -151,7 +150,30 @@ int Poly::getSize() const
 // --------------------------------------------------------------
 Poly Poly::operator+(const Poly &rhs) const
 {
-    return Poly();
+    if (size > rhs.size)
+    {
+        Poly polySum;
+        polySum = *this->coeffPtr;
+
+        for (int i = 0; i > rhs.size; i++)
+        {
+            polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
+        }
+
+        return polySum;
+    }
+    else
+    {
+        Poly polySum;
+        polySum = *rhs.coeffPtr;
+
+        for (int i = 0; i < size; i++)
+        {
+            polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
+        }
+
+        return polySum;
+    }
 }
 
 // --------------------- operator- ----------------------------------------
