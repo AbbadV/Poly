@@ -4,31 +4,39 @@
 
 #include "Poly.h"
 
-using namespace std;
 
-::Poly::istream &operator>>(::Poly::istream &inStream, Poly &poly)
+istream &operator>>(istream &inStream, Poly &poly)
 {
     return <#initializer#>;
 }
 
-::Poly::ostream &operator<<(::Poly::ostream &outStream, const Poly &poly)
+ostream &operator<<(ostream &outStream, const Poly &poly)
 {
     return <#initializer#>;
 }
 
 Poly::Poly()
 {
-
+    coeffPtr = new int[1];
+    coeffPtr[0] = 0;
 }
 
-Poly::Poly(int coeff)
+Poly::Poly(int c)
 {
-
+    coeffPtr = new int[1];
+    coeffPtr[0] = c;
 }
 
-Poly::Poly(int coeff, int power)
+Poly::Poly(int c, int p)
 {
+    coeffPtr = new int[p + 1];
 
+    for (int i = 0; i < p; i++)
+    {
+        coeffPtr[i] = 0;
+    }
+
+    coeffPtr[p] = c;
 }
 
 Poly::Poly(const Poly &source)
@@ -46,7 +54,7 @@ int Poly::getCoeff() const
     return 0;
 }
 
-void Poly::setCoeff(int coeff, int power) const
+void Poly::setCoeff(int c, int p) const
 {
 
 }
