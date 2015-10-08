@@ -26,7 +26,7 @@ public:
     ~Poly();
 
     int getCoeff(int power) const;
-    void setCoeff(int coeff, int power) const;
+    void setCoeff(int coeff, int power);
 
     int getSize() const;
 

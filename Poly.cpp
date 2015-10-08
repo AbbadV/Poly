@@ -79,11 +79,12 @@ Poly::Poly(const Poly &source)
 }
 
 // --------------------------------------------------------------
-//
+// CAUTION
 // --------------------------------------------------------------
 Poly::~Poly()
 {
-    delete coeffPtr;
+    delete[] coeffPtr;
+    //coeffPtr = NULL;
 }
 
 // --------------------------------------------------------------
@@ -91,19 +92,53 @@ Poly::~Poly()
 // --------------------------------------------------------------
 int Poly::getCoeff(int p) const
 {
-    return 0;
+    if ((p >= 0) && (p < size))
+    {
+        return coeffPtr[p];
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 // --------------------------------------------------------------
-//
+// CAUTION
 // --------------------------------------------------------------
-void Poly::setCoeff(int c, int p) const
+void Poly::setCoeff(int c, int p)
 {
+    if (p >= 0)
+    {
+        if (p < size)
+        {
+            coeffPtr[p] = c;
+        }
+        else
+        {
+            int *tempArr = new int[p + 1];
 
+            for (int i = 0; i < size; i++)
+            {
+                tempArr[i] = coeffPtr[i];
+            }
+
+            for (int j = size; j < p + 1; j++)
+            {
+                tempArr[j] = 0;
+            }
+
+            delete[] coeffPtr;
+            //coeffPtr = NULL;
+            coeffPtr = tempArr;
+            delete[] tempArr;
+            //tempArr = NULL;
+            size = p +1;
+        }
+    }
 }
 
-// --------------------------------------------------------------
-//
+// ---------------------getSize-----------------------------------------
+// returns the size of the array
 // --------------------------------------------------------------
 int Poly::getSize() const
 {
