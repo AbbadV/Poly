@@ -237,7 +237,7 @@ Poly Poly::operator*(const Poly &rhs) const
 // --------------------- operator+= -----------------------------------------
 //
 // --------------------------------------------------------------
-Poly Poly::operator+=(const Poly &rhs)
+Poly& Poly::operator+=(const Poly &rhs)
 {
     *this = *this + rhs;
     return *this;
@@ -246,7 +246,7 @@ Poly Poly::operator+=(const Poly &rhs)
 // --------------------- operator-= -----------------------------------------
 //
 // --------------------------------------------------------------
-Poly Poly::operator-=(const Poly &rhs)
+Poly& Poly::operator-=(const Poly &rhs)
 {
     *this = *this - rhs;
     return *this;
@@ -255,7 +255,7 @@ Poly Poly::operator-=(const Poly &rhs)
 // --------------------- operator*= -----------------------------------------
 //
 // --------------------------------------------------------------
-Poly Poly::operator*=(const Poly &rhs)
+Poly& Poly::operator*=(const Poly &rhs)
 {
     *this = *this * rhs;
     return *this;

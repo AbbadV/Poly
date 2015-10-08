@@ -34,9 +34,9 @@ public:
     Poly operator-(const Poly &rhs) const;
     Poly operator*(const Poly &rhs) const;
 
-    Poly operator+=(const Poly &rhs);
-    Poly operator-=(const Poly &rhs);
-    Poly operator*=(const Poly &rhs);
+    Poly& operator+=(const Poly &rhs);
+    Poly& operator-=(const Poly &rhs);
+    Poly& operator*=(const Poly &rhs);
 
     bool operator==(const Poly &rhs) const;
     bool operator!=(const Poly &rhs) const;
