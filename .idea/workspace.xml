@@ -50,8 +50,8 @@
           <file leaf-file-name="Poly.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Poly.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.3972603">
-                  <caret line="139" column="52" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
+                <state vertical-scroll-proportion="-1.7671233">
+                  <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
                   <folding />
                 </state>
               </provider>
@@ -246,18 +246,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Poly.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3972603">
-          <caret line="139" column="52" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Poly.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6849315">
           <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Poly.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7671233">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
           <folding />
         </state>
       </provider>
