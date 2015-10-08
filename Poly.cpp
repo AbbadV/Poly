@@ -17,21 +17,24 @@ ostream &operator<<(ostream &outStream, const Poly &poly)
 
 Poly::Poly()
 {
-    coeffPtr = new int[1];
+    size = 1;
+    coeffPtr = new int[size];
     coeffPtr[0] = 0;
 }
 
 Poly::Poly(int c)
 {
-    coeffPtr = new int[1];
+    size = 1;
+    coeffPtr = new int[size];
     coeffPtr[0] = c;
 }
 
 Poly::Poly(int c, int p)
 {
-    coeffPtr = new int[p + 1];
+    size = p + 1;
+    coeffPtr = new int[size];
 
-    for (int i = 0; i < p; i++)
+    for (int i = 0; i < size ; i++)
     {
         coeffPtr[i] = 0;
     }
@@ -49,7 +52,7 @@ Poly::~Poly()
 
 }
 
-int Poly::getCoeff() const
+int Poly::getCoeff(int c) const
 {
     return 0;
 }
@@ -57,6 +60,11 @@ int Poly::getCoeff() const
 void Poly::setCoeff(int c, int p) const
 {
 
+}
+
+int Poly::getSize() const
+{
+    return 0;
 }
 
 Poly Poly::operator+(const Poly &rhs) const

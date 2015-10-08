@@ -18,8 +18,10 @@ public:
     Poly(const Poly &source);
     ~Poly();
 
-    int getCoeff() const;
+    int getCoeff(int coeff) const;
     void setCoeff(int coeff, int power) const;
+
+    int getSize() const;
 
     Poly operator+(const Poly &rhs) const;
     Poly operator-(const Poly &rhs) const;
@@ -35,6 +37,7 @@ public:
 
 private:
     int* coeffPtr;
+    int size;
 };
 
 
