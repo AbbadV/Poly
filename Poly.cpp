@@ -183,11 +183,34 @@ Poly Poly::operator+(const Poly &rhs) const
 }
 
 // --------------------- operator- ----------------------------------------
-//
+// DONE
 // --------------------------------------------------------------
 Poly Poly::operator-(const Poly &rhs) const
 {
-    return Poly();
+    if (size > rhs.size)
+    {
+        Poly polyDif;
+        polyDif = *this->coeffPtr;
+
+        for (int i = 0; i > rhs.size; i++)
+        {
+            polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
+        }
+
+        return polyDif;
+    }
+    else
+    {
+        Poly polyDif;
+        polyDif = *rhs.coeffPtr;
+
+        for (int i = 0; i < size; i++)
+        {
+            polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
+        }
+
+        return polyDif;
+    }
 }
 
 // --------------------- operator* -----------------------------------------
@@ -198,9 +221,15 @@ Poly Poly::operator*(const Poly &rhs) const
     int tempSize;
     tempSize = size + rhs.size - 1;
 
-    Poly tempArr;
+    Poly tempArr(0, tempSize);
 
-    for ()
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < rhs.size; j++)
+        {
+            tempArr[i + j] += (coeffPtr[i] * rhs.coeffPtr[j]);
+        }
+    }
 
     return tempArr;
 }
@@ -210,7 +239,8 @@ Poly Poly::operator*(const Poly &rhs) const
 // --------------------------------------------------------------
 Poly Poly::operator+=(const Poly &rhs)
 {
-    return Poly();
+    *this = *this + rhs;
+    return *this;
 }
 
 // --------------------- operator-= -----------------------------------------
@@ -218,7 +248,8 @@ Poly Poly::operator+=(const Poly &rhs)
 // --------------------------------------------------------------
 Poly Poly::operator-=(const Poly &rhs)
 {
-    return Poly();
+    *this = *this - rhs;
+    return *this;
 }
 
 // --------------------- operator*= -----------------------------------------
@@ -226,7 +257,8 @@ Poly Poly::operator-=(const Poly &rhs)
 // --------------------------------------------------------------
 Poly Poly::operator*=(const Poly &rhs)
 {
-    return Poly();
+    *this = *this * rhs;
+    return *this;
 }
 
 // --------------------- operator== -----------------------------------------
@@ -234,7 +266,22 @@ Poly Poly::operator*=(const Poly &rhs)
 // --------------------------------------------------------------
 bool Poly::operator==(const Poly &rhs) const
 {
-    return false;
+    if (size != rhs.size)
+    {
+        return false;
+    }
+    else
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (coeffPtr != rhs.coeffPtr)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 // --------------------- operator!= -----------------------------------------
@@ -242,13 +289,45 @@ bool Poly::operator==(const Poly &rhs) const
 // --------------------------------------------------------------
 bool Poly::operator!=(const Poly &rhs) const
 {
-    return false;
+    if (size == rhs.size)
+    {
+        return false;
+    }
+    else
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (coeffPtr == rhs.coeffPtr)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 // --------------------- operator= -----------------------------------------
-//
+// assigns rhs to lhs
 // --------------------------------------------------------------
-void Poly::operator=(const Poly &rhs)
+Poly& Poly::operator=(const Poly &rhs)
 {
+    if (coeffPtr == rhs.coeffPtr)
+    {
+        return *this;
+    }
+    else
+    {
+        delete[] coeffPtr;
+        coeffPtr = NULL;
+        size = rhs.size;
+        coeffPtr = new int[size];
 
+        for (int i = 0; i < size; i++)
+        {
+            coeffPtr[i] = rhs.coeffPtr[i];
+        }
+
+        return *this;
+    }
 }

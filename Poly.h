@@ -40,7 +40,7 @@ public:
 
     bool operator==(const Poly &rhs) const;
     bool operator!=(const Poly &rhs) const;
-    void operator=(const Poly &rhs);
+    Poly& operator=(const Poly &rhs);
 
 private:
     int* coeffPtr;
