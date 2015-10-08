@@ -36,8 +36,8 @@
           <file leaf-file-name="Poly.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Poly.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.59945506">
-                  <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.6948229">
+                  <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -50,8 +50,8 @@
           <file leaf-file-name="Poly.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Poly.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.51771116">
-                  <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="65" />
                   <folding />
                 </state>
               </provider>
@@ -77,8 +77,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/Poly.h" />
         <option value="$PROJECT_DIR$/Poly.cpp" />
+        <option value="$PROJECT_DIR$/Poly.h" />
       </list>
     </option>
   </component>
@@ -246,18 +246,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Poly.h">
+    <entry file="file://$PROJECT_DIR$/Poly.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59945506">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Poly.cpp">
+    <entry file="file://$PROJECT_DIR$/Poly.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51771116">
-          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.6948229">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>

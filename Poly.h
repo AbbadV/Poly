@@ -1,6 +1,13 @@
+// --------------------------------------------------------------
 //
-// Created by Shyawn Karim on 10/6/15.
 //
+//
+//
+// --------------------------------------------------------------
+//
+// --------------------------------------------------------------
+//
+// --------------------------------------------------------------
 
 #ifndef POLY_POLY_H
 #define POLY_POLY_H
@@ -18,7 +25,7 @@ public:
     Poly(const Poly &source);
     ~Poly();
 
-    int getCoeff(int coeff) const;
+    int getCoeff(int power) const;
     void setCoeff(int coeff, int power) const;
 
     int getSize() const;
