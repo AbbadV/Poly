@@ -11,21 +11,71 @@
 
 #include "Poly.h"
 
+using namespace std;
 
-// --------------------- operator>> -----------------------------------------
-//
-// --------------------------------------------------------------
-istream &operator>>(istream &inStream, Poly &poly)
-{
-    return <#initializer#>;
-}
+
+//// --------------------- operator>> -----------------------------------------
+////
+//// --------------------------------------------------------------
+//istream &operator>>(istream &inStream, Poly &poly)
+//{
+//    return <#initializer#>;
+//}
 
 // --------------------- operator<< -----------------------------------------
 //
 // --------------------------------------------------------------
 ostream &operator<<(ostream &outStream, const Poly &poly)
 {
-    return <#initializer#>;
+    bool allZeroes = true;
+
+        for (int i = poly.size - 1; i >= 0; i--)
+        {
+            if (poly.coeffPtr[i] != 0)
+            {
+                allZeroes = false;
+
+                if (poly.coeffPtr[i] > 0)
+                {
+                    if (i > 1)
+                    {
+                        outStream << " +" << poly.coeffPtr[i] << "x^" << i;
+                    }
+                    else if (i == 1)
+                    {
+                        outStream << " +" << poly.coeffPtr[i] << "x";
+                    }
+                    else
+                    {
+                        outStream << " +" << poly.coeffPtr[i];
+                    }
+                }
+                if (poly.coeffPtr[i] < 0)
+                {
+                    if (i > 1)
+                    {
+                        outStream << " " << poly.coeffPtr[i] << "x^" << i;
+                    }
+                    else if (i == 1)
+                    {
+                        outStream << " " << poly.coeffPtr[i] << "x";
+                    }
+                    else
+                    {
+                        outStream << " " << poly.coeffPtr[i];
+                    }
+                }
+            }
+        }
+
+    if (allZeroes == false)
+    {
+        return outStream;
+    }
+    else
+    {
+        return outStream << "0";
+    }
 }
 
 // --------------------- Default Constructor -----------------------------------------
@@ -223,11 +273,11 @@ Poly Poly::operator*(const Poly &rhs) const
 
     Poly tempArr(0, tempSize);
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < tempSize; i++)
     {
         for (int j = 0; j < rhs.size; j++)
         {
-            tempArr[i + j] += (coeffPtr[i] * rhs.coeffPtr[j]);
+            tempArr.coeffPtr[i + j] += (coeffPtr[i] * rhs.coeffPtr[j]);
         }
     }
 

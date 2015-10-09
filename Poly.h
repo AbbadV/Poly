@@ -12,11 +12,13 @@
 #ifndef POLY_POLY_H
 #define POLY_POLY_H
 
+#include <iostream>
+
 
 class Poly
 {
-    friend istream& operator>>(istream &inStream, Poly &);
-    friend ostream& operator<<(ostream &outStream, const Poly &);
+//    friend istream& operator>>(istream &inStream, Poly &);
+    friend std::ostream& operator<<(std::ostream &outStream, const Poly &);
 
 public:
     Poly();
