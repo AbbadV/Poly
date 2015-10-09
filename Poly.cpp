@@ -210,13 +210,13 @@ void Poly::setCoeff(int c, int p)
     }
 }
 
-// --------------------- getSize -----------------------------------------
-// Returns the size of the array
-// --------------------------------------------------------------
-int Poly::getSize() const
-{
-    return size;
-}
+//// --------------------- getSize -----------------------------------------
+//// Returns the size of the array
+//// --------------------------------------------------------------
+//int Poly::getSize() const
+//{
+//    return size;
+//}
 
 // --------------------- operator+ -----------------------------------------
 // DONE
@@ -398,70 +398,72 @@ bool Poly::operator==(const Poly &rhs) const
 // --------------------------------------------------------------
 bool Poly::operator!=(const Poly &rhs) const
 {
-    if (size != rhs.size)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            if (coeffPtr[i] == rhs.coeffPtr[i])
-            {
-                return false;
-            }
-        }
+    return !(*this == rhs);
 
-        return true;
-    }
-    else
-    {
-        int bigArr;
-        int smallArr;
-
-        if (size < rhs.size)
-        {
-            smallArr = size;
-            bigArr = rhs.size;
-
-            for (int i = 0; i < smallArr; i++)
-            {
-                if (coeffPtr[i] == rhs.coeffPtr[i])
-                {
-                    return false;
-                }
-            }
-
-            for (int j = smallArr; j < bigArr; j++)
-            {
-                if (rhs.coeffPtr == 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-        else
-        {
-            bigArr = size;
-            smallArr = rhs.size;
-
-            for (int i = 0; i < smallArr; i++)
-            {
-                if (coeffPtr[i] == rhs.coeffPtr[i])
-                {
-                    return false;
-                }
-            }
-
-            for (int j = smallArr; j < bigArr; j++)
-            {
-                if (coeffPtr == 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
+//    if (size != rhs.size)
+//    {
+//        for (int i = 0; i < size; i++)
+//        {
+//            if (coeffPtr[i] == rhs.coeffPtr[i])
+//            {
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
+//    else
+//    {
+//        int bigArr;
+//        int smallArr;
+//
+//        if (size < rhs.size)
+//        {
+//            smallArr = size;
+//            bigArr = rhs.size;
+//
+//            for (int i = 0; i < smallArr; i++)
+//            {
+//                if (coeffPtr[i] == rhs.coeffPtr[i])
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            for (int j = smallArr; j < bigArr; j++)
+//            {
+//                if (rhs.coeffPtr == 0)
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            return true;
+//        }
+//        else
+//        {
+//            bigArr = size;
+//            smallArr = rhs.size;
+//
+//            for (int i = 0; i < smallArr; i++)
+//            {
+//                if (coeffPtr[i] == rhs.coeffPtr[i])
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            for (int j = smallArr; j < bigArr; j++)
+//            {
+//                if (coeffPtr == 0)
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            return true;
+//        }
+//    }
 }
 
 // --------------------- operator= -----------------------------------------
@@ -469,7 +471,7 @@ bool Poly::operator!=(const Poly &rhs) const
 // --------------------------------------------------------------
 Poly& Poly::operator=(const Poly &rhs)
 {
-    if (coeffPtr == rhs.coeffPtr)
+    if (*this == rhs)
     {
         return *this;
     }
@@ -479,7 +481,7 @@ Poly& Poly::operator=(const Poly &rhs)
         coeffPtr = NULL;
 
         size = rhs.size;
-        coeffPtr = new int[size - 1];
+        coeffPtr = new int[size + 1];
 
         for (int i = 0; i < size; i++)
         {
