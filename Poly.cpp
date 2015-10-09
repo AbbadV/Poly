@@ -242,7 +242,7 @@ Poly Poly::operator-(const Poly &rhs) const
     {
         Poly polyDif(*this);
 
-        for (int i = 0; i > rhs.size; i++)
+        for (int i = 0; i < rhs.size; i++)
         {
             polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
         }
