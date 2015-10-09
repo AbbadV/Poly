@@ -201,9 +201,9 @@ void Poly::setCoeff(int c, int p)
             delete[] coeffPtr;
             coeffPtr = NULL;
             coeffPtr = tempArr;
-            delete[] tempArr;
-            tempArr = NULL;
-            size = p +1;
+            delete[] tempArr;   // possible bad
+            tempArr = NULL;     // possible bad
+            size = p + 1;
         }
     }
 }
@@ -225,7 +225,7 @@ Poly Poly::operator+(const Poly &rhs) const
     {
         Poly polySum(*this);
 
-        for (int i = 0; i > size; i++)
+        for (int i = 0; i < rhs.size; i++)
         {
             polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
         }
@@ -236,7 +236,7 @@ Poly Poly::operator+(const Poly &rhs) const
     {
         Poly polySum(*this);
 
-        for (int i = 0; i < rhs.size; i++)
+        for (int i = 0; i < size; i++)
         {
             polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
         }
@@ -254,7 +254,7 @@ Poly Poly::operator-(const Poly &rhs) const
     {
         Poly polyDif(*this);
 
-        for (int i = 0; i > size; i++)
+        for (int i = 0; i > rhs.size; i++)
         {
             polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
         }
@@ -265,7 +265,7 @@ Poly Poly::operator-(const Poly &rhs) const
     {
         Poly polyDif(*this);
 
-        for (int i = 0; i < rhs.size; i++)
+        for (int i = 0; i < size; i++)
         {
             polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
         }
@@ -280,7 +280,7 @@ Poly Poly::operator-(const Poly &rhs) const
 Poly Poly::operator*(const Poly &rhs) const
 {
     int tempSize;
-    tempSize = size + rhs.size - 1;
+    tempSize = (size + rhs.size - 2);
 
     Poly tempArr(0, tempSize);
 
