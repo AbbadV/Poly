@@ -132,7 +132,7 @@ Poly::Poly(int c, int p)
 }
 
 // --------------------- Copy Constructor -----------------------------------------
-// Creates a deep copy of the Poly object passed in
+// Creates a deep copy of the source Poly object passed in
 // --------------------------------------------------------------
 Poly::Poly(const Poly &source)
 {
@@ -198,6 +198,8 @@ void Poly::setCoeff(int c, int p)
                 tempArr[j] = 0;
             }
 
+            tempArr[p] = c;
+
             delete[] coeffPtr;
             coeffPtr = NULL;
             coeffPtr = tempArr;
@@ -221,10 +223,10 @@ int Poly::getSize() const
 // --------------------------------------------------------------
 Poly Poly::operator+(const Poly &rhs) const
 {
+    Poly polySum(*this);
+
     if (size > rhs.size)
     {
-        Poly polySum(*this);
-
         for (int i = 0; i < rhs.size; i++)
         {
             polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
@@ -234,8 +236,6 @@ Poly Poly::operator+(const Poly &rhs) const
     }
     else
     {
-        Poly polySum(*this);
-
         for (int i = 0; i < size; i++)
         {
             polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
@@ -327,21 +327,69 @@ Poly& Poly::operator*=(const Poly &rhs)
 // --------------------------------------------------------------
 bool Poly::operator==(const Poly &rhs) const
 {
-    if (size != rhs.size)
-    {
-        return false;
-    }
-    else
+    if (size == rhs.size)
     {
         for (int i = 0; i < size; i++)
         {
-            if (coeffPtr != rhs.coeffPtr)
+            if (coeffPtr[i] != rhs.coeffPtr[i])
             {
                 return false;
             }
         }
 
         return true;
+    }
+    else
+    {
+        int bigArr;
+        int smallArr;
+
+        if (size < rhs.size)
+        {
+            smallArr = size;
+            bigArr = rhs.size;
+
+            for (int i = 0; i < smallArr; i++)
+            {
+                if (coeffPtr[i] != rhs.coeffPtr[i])
+                {
+                    return false;
+                }
+            }
+
+            for (int j = smallArr; j < bigArr; j++)
+            {
+                if (rhs.coeffPtr != 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            bigArr = size;
+            smallArr = rhs.size;
+
+            for (int i = 0; i < smallArr; i++)
+            {
+                if (coeffPtr[i] != rhs.coeffPtr[i])
+                {
+                    return false;
+                }
+            }
+
+            for (int j = smallArr; j < bigArr; j++)
+            {
+                if (coeffPtr != 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
 
@@ -350,21 +398,69 @@ bool Poly::operator==(const Poly &rhs) const
 // --------------------------------------------------------------
 bool Poly::operator!=(const Poly &rhs) const
 {
-    if (size == rhs.size)
-    {
-        return false;
-    }
-    else
+    if (size != rhs.size)
     {
         for (int i = 0; i < size; i++)
         {
-            if (coeffPtr == rhs.coeffPtr)
+            if (coeffPtr[i] == rhs.coeffPtr[i])
             {
                 return false;
             }
         }
 
         return true;
+    }
+    else
+    {
+        int bigArr;
+        int smallArr;
+
+        if (size < rhs.size)
+        {
+            smallArr = size;
+            bigArr = rhs.size;
+
+            for (int i = 0; i < smallArr; i++)
+            {
+                if (coeffPtr[i] == rhs.coeffPtr[i])
+                {
+                    return false;
+                }
+            }
+
+            for (int j = smallArr; j < bigArr; j++)
+            {
+                if (rhs.coeffPtr == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            bigArr = size;
+            smallArr = rhs.size;
+
+            for (int i = 0; i < smallArr; i++)
+            {
+                if (coeffPtr[i] == rhs.coeffPtr[i])
+                {
+                    return false;
+                }
+            }
+
+            for (int j = smallArr; j < bigArr; j++)
+            {
+                if (coeffPtr == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
 
@@ -381,8 +477,9 @@ Poly& Poly::operator=(const Poly &rhs)
     {
         delete[] coeffPtr;
         coeffPtr = NULL;
+
         size = rhs.size;
-        coeffPtr = new int[size];
+        coeffPtr = new int[size - 1];
 
         for (int i = 0; i < size; i++)
         {
