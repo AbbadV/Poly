@@ -50,35 +50,23 @@ ostream &operator<<(ostream &outStream, const Poly &poly)
             {
                 allZeroes = false;
 
-                if (poly.coeffPtr[i] > 0)
+                outStream << " ";
+
+                if (i > 1)
                 {
-                    if (i > 1)
-                    {
-                        outStream << " +" << poly.coeffPtr[i] << "x^" << i;
-                    }
-                    else if (i == 1)
-                    {
-                        outStream << " +" << poly.coeffPtr[i] << "x";
-                    }
-                    else
-                    {
-                        outStream << " +" << poly.coeffPtr[i];
-                    }
+                    outStream << "+";
                 }
-                if (poly.coeffPtr[i] < 0)
+
+                outStream << poly.coeffPtr[i];
+
+                if (i != 0 && i != 1)
                 {
-                    if (i > 1)
-                    {
-                        outStream << " " << poly.coeffPtr[i] << "x^" << i;
-                    }
-                    else if (i == 1)
-                    {
-                        outStream << " " << poly.coeffPtr[i] << "x";
-                    }
-                    else
-                    {
-                        outStream << " " << poly.coeffPtr[i];
-                    }
+                    outStream << "x^" << i;
+                }
+
+                if (i == 1)
+                {
+                    outStream << "x";
                 }
             }
         }
@@ -399,71 +387,6 @@ bool Poly::operator==(const Poly &rhs) const
 bool Poly::operator!=(const Poly &rhs) const
 {
     return !(*this == rhs);
-
-//    if (size != rhs.size)
-//    {
-//        for (int i = 0; i < size; i++)
-//        {
-//            if (coeffPtr[i] == rhs.coeffPtr[i])
-//            {
-//                return false;
-//            }
-//        }
-//
-//        return true;
-//    }
-//    else
-//    {
-//        int bigArr;
-//        int smallArr;
-//
-//        if (size < rhs.size)
-//        {
-//            smallArr = size;
-//            bigArr = rhs.size;
-//
-//            for (int i = 0; i < smallArr; i++)
-//            {
-//                if (coeffPtr[i] == rhs.coeffPtr[i])
-//                {
-//                    return false;
-//                }
-//            }
-//
-//            for (int j = smallArr; j < bigArr; j++)
-//            {
-//                if (rhs.coeffPtr == 0)
-//                {
-//                    return false;
-//                }
-//            }
-//
-//            return true;
-//        }
-//        else
-//        {
-//            bigArr = size;
-//            smallArr = rhs.size;
-//
-//            for (int i = 0; i < smallArr; i++)
-//            {
-//                if (coeffPtr[i] == rhs.coeffPtr[i])
-//                {
-//                    return false;
-//                }
-//            }
-//
-//            for (int j = smallArr; j < bigArr; j++)
-//            {
-//                if (coeffPtr == 0)
-//                {
-//                    return false;
-//                }
-//            }
-//
-//            return true;
-//        }
-//    }
 }
 
 // --------------------- operator= -----------------------------------------
