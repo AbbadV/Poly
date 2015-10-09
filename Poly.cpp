@@ -17,10 +17,25 @@ using namespace std;
 //// --------------------- operator>> -----------------------------------------
 ////
 //// --------------------------------------------------------------
-//istream &operator>>(istream &inStream, Poly &poly)
-//{
-//    return <#initializer#>;
-//}
+istream &operator>>(istream &inStream, Poly &poly)
+{
+    int coeff;
+    int power;
+
+    while (true)
+    {
+        inStream >> coeff >> power;
+
+        if ((coeff == -1) && (power == -1))
+        {
+            break;
+        }
+
+        poly.setCoeff(coeff, power);
+    }
+
+    return inStream;
+}
 
 // --------------------- operator<< -----------------------------------------
 //
@@ -208,10 +223,9 @@ Poly Poly::operator+(const Poly &rhs) const
 {
     if (size > rhs.size)
     {
-        Poly polySum;
-        polySum = *this->coeffPtr;
+        Poly polySum(*this);
 
-        for (int i = 0; i > rhs.size; i++)
+        for (int i = 0; i > size; i++)
         {
             polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
         }
@@ -220,10 +234,9 @@ Poly Poly::operator+(const Poly &rhs) const
     }
     else
     {
-        Poly polySum;
-        polySum = *rhs.coeffPtr;
+        Poly polySum(*this);
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < rhs.size; i++)
         {
             polySum.coeffPtr[i] = (coeffPtr[i] + rhs.coeffPtr[i]);
         }
@@ -239,10 +252,9 @@ Poly Poly::operator-(const Poly &rhs) const
 {
     if (size > rhs.size)
     {
-        Poly polyDif;
-        polyDif = *this->coeffPtr;
+        Poly polyDif(*this);
 
-        for (int i = 0; i > rhs.size; i++)
+        for (int i = 0; i > size; i++)
         {
             polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
         }
@@ -251,10 +263,9 @@ Poly Poly::operator-(const Poly &rhs) const
     }
     else
     {
-        Poly polyDif;
-        polyDif = *rhs.coeffPtr;
+        Poly polyDif(*this);
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < rhs.size; i++)
         {
             polyDif.coeffPtr[i] = (coeffPtr[i] - rhs.coeffPtr[i]);
         }

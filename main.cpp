@@ -21,10 +21,10 @@ int main() {
     // B = +3x^4 +1x^3
     cout << "Enter terms for polynomial A.  Enter a coefficient " << endl
     << "then exponent for each term. Enter -1 -1 to terminate." << endl;
-//    cin >> A;                                     // or use a bunch of setCoeff
+    cin >> A;                                     // or use a bunch of setCoeff
     cout << "Enter terms for polynomial B.  Enter a coefficient " << endl
     << "then exponent for each term. Enter -1 -1 to terminate." << endl;
-//    cin >> B;                                     // or use a bunch of setCoeff
+    cin >> B;                                     // or use a bunch of setCoeff
 
     // outputs exactly what is in quotes: "A = +5x^7 -4x^3 +10x -2"
     cout << "A =" << A << endl;

@@ -17,7 +17,7 @@
 
 class Poly
 {
-//    friend istream& operator>>(istream &inStream, Poly &);
+    friend std::istream& operator>>(std::istream &inStream, Poly &);
     friend std::ostream& operator<<(std::ostream &outStream, const Poly &);
 
 public:
