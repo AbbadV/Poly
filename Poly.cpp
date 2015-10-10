@@ -1,4 +1,4 @@
-// --------------------- Poly.cpp -----------------------------------------
+// --------------------- poly.cpp -----------------------------------------
 //
 // Shyawn Karim, CSS 343
 // Created:         October 6, 2015
@@ -14,10 +14,12 @@
 using namespace std;
 
 
-//// --------------------- operator>> -----------------------------------------
-////
-//// --------------------------------------------------------------
-istream &operator>>(istream &inStream, Poly &poly)
+// --------------------- Overloaded >> -----------------------------------------
+// Takes two ints entered from console
+// Sets the first to coeff and the 2nd to power
+// Calls setCoeff() to insert into correct Poly object
+// --------------------------------------------------------------
+istream &operator>>(istream &inStream, Poly &sourceCoeff)
 {
     int coeff;
     int power;
@@ -31,33 +33,34 @@ istream &operator>>(istream &inStream, Poly &poly)
             break;
         }
 
-        poly.setCoeff(coeff, power);
+        sourceCoeff.setCoeff(coeff, power);
     }
 
     return inStream;
 }
 
-// --------------------- operator<< -----------------------------------------
-//
+// --------------------- Overloaded << -----------------------------------------
+// Outputs the polynomial in print form to the console
+// If the array is empty then 0 is returned
 // --------------------------------------------------------------
-ostream &operator<<(ostream &outStream, const Poly &poly)
+ostream &operator<<(ostream &outStream, const Poly &sourcePoly)
 {
     bool allZeroes = true;
 
-        for (int i = poly.size - 1; i >= 0; i--)
+        for (int i = sourcePoly.size - 1; i >= 0; i--)
         {
-            if (poly.coeffPtr[i] != 0)
+            if (sourcePoly.coeffPtr[i] != 0)
             {
                 allZeroes = false;
 
                 outStream << " ";
 
-                if (poly.coeffPtr[i] > 0)
+                if (sourcePoly.coeffPtr[i] > 0)
                 {
                     outStream << "+";
                 }
 
-                outStream << poly.coeffPtr[i];
+                outStream << sourcePoly.coeffPtr[i];
 
                 if (i != 0 && i != 1)
                 {
@@ -82,7 +85,8 @@ ostream &operator<<(ostream &outStream, const Poly &poly)
 }
 
 // --------------------- Default Constructor -----------------------------------------
-// Takes no parameters, creates Poly object with size 1 and value set to 0
+// Takes no parameters and creates a Poly object
+// Array size set to 1 and value set to 0
 // --------------------------------------------------------------
 Poly::Poly()
 {
@@ -92,23 +96,23 @@ Poly::Poly()
 }
 
 // --------------------- Constructor int -----------------------------------------
-// Overloaded constructor takes one parameter. Creates a Poly object with
-// array size 1 and sets that value to the coefficent parameter
+// Overloaded constructor takes one parameter and creates a Poly object
+// Array size set to 1 and value set to coeff passed in
 // --------------------------------------------------------------
-Poly::Poly(int c)
+Poly::Poly(int coeff)
 {
     size = 1;
     coeffPtr = new int[size];
-    coeffPtr[0] = c;
+    coeffPtr[0] = coeff;
 }
 
 // --------------------- Constructor int int -----------------------------------------
-// Overloaded constructor takes two parameters. Creates a Poly object with
-// array size set to power + 1 and the coefficient value in the last index
+// Overloaded constructor takes two parameters and creates a Poly object
+// Array size set to power + 1 and the coefficient value in the last index
 // --------------------------------------------------------------
-Poly::Poly(int c, int p)
+Poly::Poly(int coeff, int power)
 {
-    size = p + 1;
+    size = power + 1;
     coeffPtr = new int[size];
 
     for (int i = 0; i < size ; i++)
@@ -116,7 +120,7 @@ Poly::Poly(int c, int p)
         coeffPtr[i] = 0;
     }
 
-    coeffPtr[p] = c;
+    coeffPtr[power] = coeff;
 }
 
 // --------------------- Copy Constructor -----------------------------------------
@@ -146,11 +150,11 @@ Poly::~Poly()
 // Returns the coefficient at chosen index (power)
 // Returns 0 if index is out of range
 // --------------------------------------------------------------
-int Poly::getCoeff(int p) const
+int Poly::getCoeff(int power) const
 {
-    if ((p >= 0) && (p < size))
+    if ((power >= 0) && (power < size))
     {
-        return coeffPtr[p];
+        return coeffPtr[power];
     }
     else
     {
@@ -159,85 +163,86 @@ int Poly::getCoeff(int p) const
 }
 
 // --------------------- setCoeff -----------------------------------------
-// Adds an additional coefficient to an already established poly array
-// If new coefficient has a power greater than largest array index a new
-// array is dynamically allocated and all coefficients are transferred
-// to the new array
+// Set coeff passed in to the array index represented by power
+// If power is out of array range then a new array is dynamically
+// allocated and the coeff is assigned to correct index
 // --------------------------------------------------------------
-void Poly::setCoeff(int c, int p)
+void Poly::setCoeff(int coeff, int power)
 {
-    if (p >= 0)
+    if (power >= 0)
     {
-        if (p < size)
+        if (power < size)
         {
-            coeffPtr[p] = c;
+            coeffPtr[power] = coeff;
         }
         else
         {
-            int *tempArr = new int[p + 1];
+            int *tempArr = new int[power + 1];
 
             for (int i = 0; i < size; i++)
             {
                 tempArr[i] = coeffPtr[i];
             }
 
-            for (int j = size; j < p + 1; j++)
+            for (int j = size; j < power + 1; j++)
             {
                 tempArr[j] = 0;
             }
 
-            tempArr[p] = c;
+            tempArr[power] = coeff;
 
             delete[] coeffPtr;
             coeffPtr = NULL;
             coeffPtr = tempArr;
             tempArr = NULL;
-            size = p + 1;
+            size = power + 1;
         }
     }
 }
 
-// --------------------- operator+ -----------------------------------------
-// DONE
+// --------------------- Overloaded + -----------------------------------------
+// Adds two different polynomials together
+// Returns the sum in a Poly object
 // --------------------------------------------------------------
 Poly Poly::operator+(const Poly &rhs) const
 {
     if (this->size > rhs.size)
     {
-        Poly polyDif(0, this->size);
+        Poly polySum(0, this->size);
 
         for (int i = 0; i < this->size; i++)
         {
-            polyDif.coeffPtr[i] = this->coeffPtr[i];
+            polySum.coeffPtr[i] = this->coeffPtr[i];
         }
 
         for (int i = 0; i < rhs.size; i++)
         {
-            polyDif.coeffPtr[i] += rhs.coeffPtr[i];
+            polySum.coeffPtr[i] += rhs.coeffPtr[i];
         }
 
-        return polyDif;
+        return polySum;
     }
     else
     {
-        Poly polyDif(0, rhs.size);
+        Poly polySum(0, rhs.size);
 
         for (int i = 0; i < rhs.size; i++)
         {
-            polyDif.coeffPtr[i] = rhs.coeffPtr[i];
+            polySum.coeffPtr[i] = rhs.coeffPtr[i];
         }
 
         for (int i = 0; i < this->size; i++)
         {
-            polyDif.coeffPtr[i] += this->coeffPtr[i];
+            polySum.coeffPtr[i] += this->coeffPtr[i];
         }
 
-        return polyDif;
+        return polySum;
     }
 }
 
-// --------------------- operator- ----------------------------------------
-// DONE
+// --------------------- Overloaded - ----------------------------------------
+// Subtracts one polynomial from another
+// Returns the difference in a Poly object
 // --------------------------------------------------------------
 Poly Poly::operator-(const Poly &rhs) const
 {
@@ -275,8 +280,9 @@ Poly Poly::operator-(const Poly &rhs) const
     }
 }
 
-// --------------------- operator* -----------------------------------------
-// WORKING
+// --------------------- Overloaded * -----------------------------------------
+// Multiplies two different polynomials together
+// Returns the product in a Poly object
 // --------------------------------------------------------------
 Poly Poly::operator*(const Poly &rhs) const
 {
@@ -299,8 +305,9 @@ Poly Poly::operator*(const Poly &rhs) const
     return tempArr;
 }
 
-// --------------------- operator+= -----------------------------------------
-//
+// --------------------- Overloaded += -----------------------------------------
+// Adds two different polynomials together
+// Assigns the sum to the Poly object to the left of assignment
 // --------------------------------------------------------------
 Poly& Poly::operator+=(const Poly &rhs)
 {
@@ -308,8 +315,9 @@ Poly& Poly::operator+=(const Poly &rhs)
     return *this;
 }
 
-// --------------------- operator-= -----------------------------------------
-//
+// --------------------- Overloaded -= -----------------------------------------
+// Subtracts one from polynomial from another
+// Assigns the difference to the Poly object to the left of assignment
 // --------------------------------------------------------------
 Poly& Poly::operator-=(const Poly &rhs)
 {
@@ -317,8 +325,9 @@ Poly& Poly::operator-=(const Poly &rhs)
     return *this;
 }
 
-// --------------------- operator*= -----------------------------------------
-//
+// --------------------- Overloaded *= -----------------------------------------
+// Multiplies two different polynomials
+// Assigns the product to the Poly object to the left of assignment
 // --------------------------------------------------------------
 Poly& Poly::operator*=(const Poly &rhs)
 {
@@ -326,8 +335,9 @@ Poly& Poly::operator*=(const Poly &rhs)
     return *this;
 }
 
-// --------------------- operator== -----------------------------------------
-//
+// --------------------- Overloaded == -----------------------------------------
+// Checks if two Poly objects contain identical polynomials
+// Returns true if they are and false if they aren't
 // --------------------------------------------------------------
 bool Poly::operator==(const Poly &rhs) const
 {
@@ -398,7 +408,8 @@ bool Poly::operator==(const Poly &rhs) const
 }
 
 // --------------------- operator!= -----------------------------------------
-//
+// Checks if two Poly objects contain different polynomials
+// Returns true if they are and false if they aren't
 // --------------------------------------------------------------
 bool Poly::operator!=(const Poly &rhs) const
 {
@@ -406,7 +417,7 @@ bool Poly::operator!=(const Poly &rhs) const
 }
 
 // --------------------- operator= -----------------------------------------
-// assigns rhs to lhs
+// Assigns the right Poly to the left Poly of the assignment operator
 // --------------------------------------------------------------
 Poly& Poly::operator=(const Poly &rhs)
 {
