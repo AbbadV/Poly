@@ -191,20 +191,11 @@ void Poly::setCoeff(int c, int p)
             delete[] coeffPtr;
             coeffPtr = NULL;
             coeffPtr = tempArr;
-            delete[] tempArr;   // possible bad
-            tempArr = NULL;     // possible bad
+            tempArr = NULL;
             size = p + 1;
         }
     }
 }
-
-//// --------------------- getSize -----------------------------------------
-//// Returns the size of the array
-//// --------------------------------------------------------------
-//int Poly::getSize() const
-//{
-//    return size;
-//}
 
 // --------------------- operator+ -----------------------------------------
 // DONE

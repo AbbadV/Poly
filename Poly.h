@@ -31,8 +31,6 @@ public:
     int getCoeff(int power) const;
     void setCoeff(int coeff, int power);
 
-//    int getSize() const;
-
     Poly operator+(const Poly &rhs) const;
     Poly operator-(const Poly &rhs) const;
     Poly operator*(const Poly &rhs) const;
