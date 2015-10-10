@@ -121,7 +121,7 @@ int main() {
     cout << "D =" << D << endl << endl;
 
 
-
+//    cout << "After:  D = +15x^11 +5x^10 -12x^7 -4x^6 +30x^5 +4x^4 -2x^3 -15" << endl << endl;
 
 
 
