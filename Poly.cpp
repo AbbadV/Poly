@@ -24,20 +24,20 @@ istream &operator>>(istream &inStream, Poly &sourceCoeff)
     int coeff;
     int power;
 
-    while (true)
+    while (true)    // takes in a pairs of numbers from the console
     {
-        inStream >> coeff >> power;
+        inStream >> coeff >> power; // assigns first to coeff, second to power
 
-        if ((coeff == -1) && (power == -1))
+        if ((coeff == -1) && (power == -1)) // ends instream when both numbers are -1
         {
             break;
         }
 
-        sourceCoeff.setCoeff(coeff, power);
+        sourceCoeff.setCoeff(coeff, power); // assigns numbers to Poly object
     }
 
     return inStream;
-}
+}   // end of function
 
 // --------------------- Overloaded << -----------------------------------------
 // Outputs the polynomial in print form to the console
@@ -45,44 +45,45 @@ istream &operator>>(istream &inStream, Poly &sourceCoeff)
 // --------------------------------------------------------------
 ostream &operator<<(ostream &outStream, const Poly &sourcePoly)
 {
-    bool allZeroes = true;
+    bool allZeroes = true;  // check to see if polynomial is all 0s
 
-        for (int i = sourcePoly.size - 1; i >= 0; i--)
+        for (int i = sourcePoly.size - 1; i >= 0; i--)  // iterates through
+            // entire array beginning with last index
         {
-            if (sourcePoly.coeffPtr[i] != 0)
+            if (sourcePoly.coeffPtr[i] != 0)    // check if index isn't 0
             {
-                allZeroes = false;
+                allZeroes = false;  // assigns allZeroes check to false
 
-                outStream << " ";
+                outStream << " ";   // prints a space before the coefficient
 
-                if (sourcePoly.coeffPtr[i] > 0)
+                if (sourcePoly.coeffPtr[i] > 0) // check if index is greater than 0
                 {
-                    outStream << "+";
+                    outStream << "+";   // prints a + before the coefficient
                 }
 
-                outStream << sourcePoly.coeffPtr[i];
+                outStream << sourcePoly.coeffPtr[i];    // prints coefficient at index
 
-                if (i != 0 && i != 1)
+                if (i != 0 && i != 1)   // check if power should be printed
                 {
-                    outStream << "x^" << i;
+                    outStream << "x^" << i; // prints the x and power after coefficient
                 }
 
-                if (i == 1)
+                if (i == 1) // check if x should be printed
                 {
-                    outStream << "x";
+                    outStream << "x";   // prints x after the coefficient
                 }
             }
         }
 
-    if (allZeroes == false)
+    if (allZeroes == false) // check if polynomial wasn't all 0s
     {
-        return outStream;
+        return outStream;   // prints polynomial in print form
     }
     else
     {
-        return outStream << "0";
+        return outStream << "0";    // prints 0 if polynomial is all zeroes
     }
-}
+}   // end of function
 
 // --------------------- Default Constructor -----------------------------------------
 // Takes no parameters and creates a Poly object
@@ -93,7 +94,7 @@ Poly::Poly()
     size = 1;
     coeffPtr = new int[size];
     coeffPtr[0] = 0;
-}
+}   // end of function
 
 // --------------------- Constructor int -----------------------------------------
 // Overloaded constructor takes one parameter and creates a Poly object
@@ -104,7 +105,7 @@ Poly::Poly(int coeff)
     size = 1;
     coeffPtr = new int[size];
     coeffPtr[0] = coeff;
-}
+}   // end of function
 
 // --------------------- Constructor int int -----------------------------------------
 // Overloaded constructor takes two parameters and creates a Poly object
@@ -121,7 +122,7 @@ Poly::Poly(int coeff, int power)
     }
 
     coeffPtr[power] = coeff;
-}
+}   // end of function
 
 // --------------------- Copy Constructor -----------------------------------------
 // Creates a deep copy of the source Poly object passed in
@@ -135,7 +136,7 @@ Poly::Poly(const Poly &source)
     {
         coeffPtr[i] = source.coeffPtr[i];
     }
-}
+}   // end of function
 
 // --------------------- Destructor -----------------------------------------
 // Deletes coeffPtr and sets it NULL
@@ -144,7 +145,7 @@ Poly::~Poly()
 {
     delete[] coeffPtr;
     coeffPtr = NULL;
-}
+}   // end of function
 
 // --------------------- getCoeff -----------------------------------------
 // Returns the coefficient at chosen index (power)
@@ -152,15 +153,15 @@ Poly::~Poly()
 // --------------------------------------------------------------
 int Poly::getCoeff(int power) const
 {
-    if ((power >= 0) && (power < size))
+    if ((power >= 0) && (power < size)) // check if coefficient is in range
     {
-        return coeffPtr[power];
+        return coeffPtr[power]; // returns coefficient
     }
     else
     {
-        return 0;
+        return 0;   // returns 0 if request was not in range
     }
-}
+}   // end of function
 
 // --------------------- setCoeff -----------------------------------------
 // Set coeff passed in to the array index represented by power
@@ -169,36 +170,36 @@ int Poly::getCoeff(int power) const
 // --------------------------------------------------------------
 void Poly::setCoeff(int coeff, int power)
 {
-    if (power >= 0)
+    if (power >= 0) // checks if requested index is positive
     {
-        if (power < size)
+        if (power < size)   // check if power is in range of array
         {
-            coeffPtr[power] = coeff;
+            coeffPtr[power] = coeff;    // assigns coefficient to index power
         }
         else
         {
-            int *tempArr = new int[power + 1];
+            int *tempArr = new int[power + 1];  // creates new temp array
 
             for (int i = 0; i < size; i++)
             {
-                tempArr[i] = coeffPtr[i];
+                tempArr[i] = coeffPtr[i];   // copies values from old array into temp
             }
 
             for (int j = size; j < power + 1; j++)
             {
-                tempArr[j] = 0;
+                tempArr[j] = 0; // fill remainder of temp array indexes with 0s
             }
 
-            tempArr[power] = coeff;
+            tempArr[power] = coeff; // assigns coeff to correct index of temp array
 
-            delete[] coeffPtr;
-            coeffPtr = NULL;
-            coeffPtr = tempArr;
-            tempArr = NULL;
-            size = power + 1;
+            delete[] coeffPtr;  // deletes old array
+            coeffPtr = NULL;    // points to NULL
+            coeffPtr = tempArr; // points to temp array
+            tempArr = NULL;     // temp array pointer points to NULL
+            size = power + 1;   // reasigns size to the size of temp array
         }
     }
-}
+}   // end of function
 
 // --------------------- Overloaded + -----------------------------------------
 // Adds two different polynomials together
@@ -206,39 +207,41 @@ void Poly::setCoeff(int coeff, int power)
 // --------------------------------------------------------------
 Poly Poly::operator+(const Poly &rhs) const
 {
-    if (this->size > rhs.size)
+    if (this->size > rhs.size)  // check if lhs is greater than rhs
     {
-        Poly polySum(0, this->size);
+        Poly polySum(0, this->size);    // create Poly object to hold sum
 
         for (int i = 0; i < this->size; i++)
         {
-            polySum.coeffPtr[i] = this->coeffPtr[i];
+            polySum.coeffPtr[i] = this->coeffPtr[i];    // copies all values of
+                // the lhs into the new sum array
         }
 
         for (int i = 0; i < rhs.size; i++)
         {
-            polySum.coeffPtr[i] += rhs.coeffPtr[i];
+            polySum.coeffPtr[i] += rhs.coeffPtr[i]; // adds rhs to sum array
         }
 
-        return polySum;
+        return polySum; // returns the sum of the polynomials
     }
-    else
+    else    // rhs is greater than lhs
     {
-        Poly polySum(0, rhs.size);
+        Poly polySum(0, rhs.size);  // create Poly object of correct size
 
         for (int i = 0; i < rhs.size; i++)
         {
-            polySum.coeffPtr[i] = rhs.coeffPtr[i];
+            polySum.coeffPtr[i] = rhs.coeffPtr[i];  // copies all values of
+            // the rhs into the new sum array
         }
 
         for (int i = 0; i < this->size; i++)
         {
-            polySum.coeffPtr[i] += this->coeffPtr[i];
+            polySum.coeffPtr[i] += this->coeffPtr[i];   // adds lhs to sum array
         }
 
-        return polySum;
+        return polySum; // returns the sum of the polynomials
     }
-}
+}   // end of function
 
 // --------------------- Overloaded - ----------------------------------------
 // Subtracts one polynomial from another
@@ -246,39 +249,41 @@ Poly Poly::operator+(const Poly &rhs) const
 // --------------------------------------------------------------
 Poly Poly::operator-(const Poly &rhs) const
 {
-    if (this->size > rhs.size)
+    if (this->size > rhs.size)  // check if lhs is greater than rhs
     {
-        Poly polyDif(0, this->size);
+        Poly polyDif(0, this->size);    // create Poly object to hold difference
 
         for (int i = 0; i < this->size; i++)
         {
-            polyDif.coeffPtr[i] = this->coeffPtr[i];
+            polyDif.coeffPtr[i] = this->coeffPtr[i];    // copies all values of
+            // the lhs into the new difference array
         }
 
         for (int i = 0; i < rhs.size; i++)
         {
-            polyDif.coeffPtr[i] -= rhs.coeffPtr[i];
+            polyDif.coeffPtr[i] -= rhs.coeffPtr[i]; // subtracts rhs from differnce array
         }
 
-        return polyDif;
+        return polyDif; // returns the difference of the polynomials
     }
-    else
+    else    // rhs is greater than lhs
     {
-        Poly polyDif(0, rhs.size);
+        Poly polyDif(0, rhs.size);  // create Poly object to hold difference
 
         for (int i = 0; i < this->size; i++)
         {
-            polyDif.coeffPtr[i] = this->coeffPtr[i];
+            polyDif.coeffPtr[i] = this->coeffPtr[i];    // copies all values of
+            // the rhs into the new difference array
         }
 
         for (int i = 0; i < rhs.size; i++)
         {
-            polyDif.coeffPtr[i] -= rhs.coeffPtr[i];
+            polyDif.coeffPtr[i] -= rhs.coeffPtr[i]; // subtracts rhs from difference array
         }
 
-        return polyDif;
+        return polyDif; // returns the difference of the polynomials
     }
-}
+}   // end of function
 
 // --------------------- Overloaded * -----------------------------------------
 // Multiplies two different polynomials together
@@ -286,24 +291,25 @@ Poly Poly::operator-(const Poly &rhs) const
 // --------------------------------------------------------------
 Poly Poly::operator*(const Poly &rhs) const
 {
-    int tempSize;
-    tempSize = (this->size + rhs.size - 2);
+    int tempSize;   // creates a variable to hold the size of new array
+    tempSize = (this->size + rhs.size - 2); // -2 to account for the constructor
 
-    Poly tempArr(0, tempSize);
+    Poly tempArr(0, tempSize);  // creates new Poly object to hold the product
 
         for (int i = 0; i < this->size; i++)
         {
-            if (this->coeffPtr[i] != 0)
+            if (this->coeffPtr[i] != 0) // only multiply by numbers that are't 0
             {
                 for (int j = 0; j < rhs.size; j++)
                 {
                     tempArr.coeffPtr[i + j] += (this->coeffPtr[i] * rhs.coeffPtr[j]);
+                    // fills temp array of the new product values
                 }
             }
         }
 
-    return tempArr;
-}
+    return tempArr; // returns the product of the 2 polynomials
+}   // end of function
 
 // --------------------- Overloaded += -----------------------------------------
 // Adds two different polynomials together
@@ -313,7 +319,7 @@ Poly& Poly::operator+=(const Poly &rhs)
 {
     *this = *this + rhs;
     return *this;
-}
+}   // end of function
 
 // --------------------- Overloaded -= -----------------------------------------
 // Subtracts one from polynomial from another
@@ -323,7 +329,7 @@ Poly& Poly::operator-=(const Poly &rhs)
 {
     *this = *this - rhs;
     return *this;
-}
+}   // end of function
 
 // --------------------- Overloaded *= -----------------------------------------
 // Multiplies two different polynomials
@@ -333,7 +339,7 @@ Poly& Poly::operator*=(const Poly &rhs)
 {
     *this = *this * rhs;
     return *this;
-}
+}   // end of function
 
 // --------------------- Overloaded == -----------------------------------------
 // Checks if two Poly objects contain identical polynomials
@@ -341,124 +347,124 @@ Poly& Poly::operator*=(const Poly &rhs)
 // --------------------------------------------------------------
 bool Poly::operator==(const Poly &rhs) const
 {
-    if (size == rhs.size)
+    if (this->size == rhs.size)   // check to see if both arrays are the same size
     {
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < this->size; i++)
         {
-            if (coeffPtr[i] != rhs.coeffPtr[i])
+            if (coeffPtr[i] != rhs.coeffPtr[i]) // check if coeffs match
             {
-                return false;
+                return false;   // polynomials are not the same
             }
         }
 
-        return true;
+        return true;    // polynomials are the same
     }
-    else
+    else    // polynomial arrays are not the same size
     {
         int bigArr;
         int smallArr;
 
-        if (size < rhs.size)
+        if (this->size < rhs.size)  // if rhs is bigger
         {
-            smallArr = size;
-            bigArr = rhs.size;
+            smallArr = this->size;  // lhs is smaller array
+            bigArr = rhs.size;  // rhs is bigger array
 
             for (int i = 0; i < smallArr; i++)
             {
-                if (coeffPtr[i] != rhs.coeffPtr[i])
+                if (coeffPtr[i] != rhs.coeffPtr[i]) // check if coeffs match
                 {
-                    return false;
+                    return false;   // polynomials are not the same
                 }
             }
 
             for (int j = smallArr; j < bigArr; j++)
             {
-                if (rhs.coeffPtr != 0)
+                if (rhs.coeffPtr != 0)  // check if remainder of are 0s
                 {
-                    return false;
+                    return false;   // polynomials are not the same
                 }
             }
 
-            return true;
+            return true;    // polynomials are the same
         }
-        else
+        else    // lhs is bigger
         {
-            bigArr = size;
-            smallArr = rhs.size;
+            smallArr = rhs.size;    // rhs is smaller array
+            bigArr = this->size;    // lhs is bigger array
 
             for (int i = 0; i < smallArr; i++)
             {
-                if (coeffPtr[i] != rhs.coeffPtr[i])
+                if (coeffPtr[i] != rhs.coeffPtr[i]) // check if coeffs match
                 {
-                    return false;
+                    return false;   // polynomials are not the same
                 }
             }
 
             for (int j = smallArr; j < bigArr; j++)
             {
-                if (coeffPtr != 0)
+                if (coeffPtr != 0)  // check if remainder are 0s
                 {
-                    return false;
+                    return false;   // polynomials are not the same
                 }
             }
 
-            return true;
+            return true;    // polynomials are the same
         }
     }
-}
+}   // end of function
 
-// --------------------- operator!= -----------------------------------------
+// --------------------- Overloaded != -----------------------------------------
 // Checks if two Poly objects contain different polynomials
 // Returns true if they are and false if they aren't
 // --------------------------------------------------------------
 bool Poly::operator!=(const Poly &rhs) const
 {
-    return !(*this == rhs);
-}
+    return !(*this == rhs); // returns the opposite of the overloaded ==
+}   // end of function
 
-// --------------------- operator= -----------------------------------------
+// --------------------- Overloaded = -----------------------------------------
 // Assigns the right Poly to the left Poly of the assignment operator
 // --------------------------------------------------------------
 Poly& Poly::operator=(const Poly &rhs)
 {
-    if (this->coeffPtr == rhs.coeffPtr)
+    if (this->coeffPtr == rhs.coeffPtr) // check if lhs and rhs are identical
     {
-        return *this;
+        return *this;   // returns lhs
     }
 
-    if (this->size < rhs.size)
+    if (this->size < rhs.size)  // check if lhs is smaller than rhs
     {
-        delete[] this->coeffPtr;
-        coeffPtr = NULL;
-        this->size = rhs.size;
-        this->coeffPtr = new int[this->size];
+        delete[] this->coeffPtr;    // delete lhs array
+        coeffPtr = NULL;    // set lhs pointer to NULL
+        this->size = rhs.size;  // sets lhs size to be the same as rhs
+        this->coeffPtr = new int[this->size];   // new array created to copy into
 
         for (int i = 0; i < this->size; i++)
         {
-            this->coeffPtr[i] = rhs.coeffPtr[i];
+            this->coeffPtr[i] = rhs.coeffPtr[i];    // copies values of rhs into new array
         }
     }
 
-    if (this->size > rhs.size)
+    if (this->size > rhs.size)  // check if lhs is bigger than rhs
     {
         for (int i = 0; i < this->size; i++)
         {
-            this->coeffPtr[i] = 0;
+            this->coeffPtr[i] = 0;  // sets all lhs indexes to 0
         }
 
         for (int j = 0; j < rhs.size; j++)
         {
-            this->coeffPtr[j] = rhs.coeffPtr[j];
+            this->coeffPtr[j] = rhs.coeffPtr[j]; // copies values of rhs into new array
         }
     }
 
-    if (this->size == rhs.size)
+    if (this->size == rhs.size) // check if lhs and rhs sizes are the same
     {
         for (int k = 0; k < this->size; k++)
         {
-            this->coeffPtr[k] = rhs.coeffPtr[k];
+            this->coeffPtr[k] = rhs.coeffPtr[k];    // copies values of rhs into new array
         }
     }
 
-    return *this;
-}
+    return *this;   // returns new array
+}   // end of function
