@@ -4,9 +4,16 @@
 // Created:         October 6, 2015
 // Last Modified:   October 10, 2015
 // --------------------------------------------------------------
-// Purpose:
+// Purpose: This class implements a representation of polynomials
+// that do not have negative exponents.  Each polynomial is
+// stored completely in one array. The index of the array
+// represents the power and is where the corresponding coefficient
+// is stored. Polynomials will be able to be changed any time and
+// can be added, subtracted, or multiplied by each other.
 // --------------------------------------------------------------
-// Notes:
+// Assumptions: All data will be assumed to be correct and there
+// is no error handling of any kind.  Negative exponents will be
+// ignored.
 // --------------------------------------------------------------
 
 #ifndef POLY_POLY_H

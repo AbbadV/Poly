@@ -4,12 +4,19 @@
 // Created:         October 6, 2015
 // Last Modified:   October 10, 2015
 // --------------------------------------------------------------
-// Purpose:
+// Purpose: This class implements a representation of polynomials
+// that do not have negative exponents.  Each polynomial is
+// stored completely in one array. The index of the array
+// represents the power and is where the corresponding coefficient
+// is stored. Polynomials will be able to be changed any time and
+// can be added, subtracted, or multiplied by each other.
 // --------------------------------------------------------------
-// Notes:
+// Assumptions: All data will be assumed to be correct and there
+// is no error handling of any kind.  Negative exponents will be
+// ignored.
 // --------------------------------------------------------------
 
-#include "Poly.h"
+#include "poly.h"
 
 using namespace std;
 
@@ -91,8 +98,8 @@ ostream &operator<<(ostream &outStream, const Poly &sourcePoly)
 // --------------------------------------------------------------
 Poly::Poly()
 {
-    size = 1;
-    coeffPtr = new int[size];
+    this->size = 1;
+    coeffPtr = new int[this->size];
     coeffPtr[0] = 0;
 }   // end of function
 
@@ -102,8 +109,8 @@ Poly::Poly()
 // --------------------------------------------------------------
 Poly::Poly(int coeff)
 {
-    size = 1;
-    coeffPtr = new int[size];
+    this->size = 1;
+    coeffPtr = new int[this->size];
     coeffPtr[0] = coeff;
 }   // end of function
 
@@ -113,10 +120,10 @@ Poly::Poly(int coeff)
 // --------------------------------------------------------------
 Poly::Poly(int coeff, int power)
 {
-    size = power + 1;
-    coeffPtr = new int[size];
+    this->size = power + 1;
+    coeffPtr = new int[this->size];
 
-    for (int i = 0; i < size ; i++)
+    for (int i = 0; i < this->size ; i++)
     {
         coeffPtr[i] = 0;
     }
@@ -129,10 +136,10 @@ Poly::Poly(int coeff, int power)
 // --------------------------------------------------------------
 Poly::Poly(const Poly &source)
 {
-    size = source.size;
+    this->size = source.size;
     coeffPtr = new int[size];
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < this->size; i++)
     {
         coeffPtr[i] = source.coeffPtr[i];
     }
@@ -153,7 +160,7 @@ Poly::~Poly()
 // --------------------------------------------------------------
 int Poly::getCoeff(int power) const
 {
-    if ((power >= 0) && (power < size)) // check if coefficient is in range
+    if ((power >= 0) && (power < this->size)) // check if coefficient is in range
     {
         return coeffPtr[power]; // returns coefficient
     }
@@ -172,7 +179,7 @@ void Poly::setCoeff(int coeff, int power)
 {
     if (power >= 0) // checks if requested index is positive
     {
-        if (power < size)   // check if power is in range of array
+        if (power < this->size)   // check if power is in range of array
         {
             coeffPtr[power] = coeff;    // assigns coefficient to index power
         }
@@ -180,12 +187,12 @@ void Poly::setCoeff(int coeff, int power)
         {
             int *tempArr = new int[power + 1];  // creates new temp array
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < this->size; i++)
             {
                 tempArr[i] = coeffPtr[i];   // copies values from old array into temp
             }
 
-            for (int j = size; j < power + 1; j++)
+            for (int j = this->size; j < power + 1; j++)
             {
                 tempArr[j] = 0; // fill remainder of temp array indexes with 0s
             }
@@ -196,7 +203,7 @@ void Poly::setCoeff(int coeff, int power)
             coeffPtr = NULL;    // points to NULL
             coeffPtr = tempArr; // points to temp array
             tempArr = NULL;     // temp array pointer points to NULL
-            size = power + 1;   // reasigns size to the size of temp array
+            this->size = power + 1;   // reasigns size to the size of temp array
         }
     }
 }   // end of function
